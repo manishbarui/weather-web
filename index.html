@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      flex-direction: column;
+    }
+
+    .weather-web {
+      width: 350px;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 160px; /* Updated logo size */
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #333;
+    }
+
+    #searchCity {
+      width: 70%;
+      padding: 5px;
+      margin-top: 10px;
+    }
+
+    .weather-info {
+      margin-top: 20px;
+    }
+
+    .current-weather {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .icon {
+      font-size: 2.5em;
+    }
+
+    .temp-info {
+      text-align: left;
+    }
+
+    .temp {
+      font-size: 3em;
+      color: #333;
+    }
+
+    .details {
+      margin-top: 20px;
+    }
+
+    .details p {
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.8em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="weather-web">
+    <header>
+      <div class="logo">
+        <!-- Updated logo image -->
+        <img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png" alt="Weather Logo">
+      </div>
+      <h2>Weather Web</h2>
+    </header>
+    <input type="text" id="searchCity" placeholder="Enter city name">
+    <button id="searchBtn">Search</button>
+
+    <div class="weather-info">
+      <h3 id="location"></h3>
+      <div class="current-weather">
+        <div class="icon">
+          <i class="fas fa-cloud"></i>
+        </div>
+        <div class="temp-info">
+          <p class="temp"></p>
+          <p id="weather-condition"></p>
+        </div>
+      </div>
+      <div class="details">
+        <p><strong>Wind:</strong> <span id="wind"></span></p>
+        <p><strong>Pressure:</strong> <span id="pressure"></span></p>
+        <p><strong>Humidity:</strong> <span id="humidity"></span></p>
+        <p><strong>Dew Point:</strong> <span id="dewPoint"></span></p>
+        <p><strong>Visibility:</strong> <span id="visibility"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© Manish's Weather Web. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const city = document.getElementById('searchCity').value;
+      getWeather(city);
+    });
+
+    function getWeather(city) {
+      const apiKey = '6ae5fe72c30bb6c5aa2fa468ebdff6aa';
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const location = `${data.name}, ${data.sys.country}`;
+          const temp = `${Math.round(data.main.temp)}°C`;
+          const feelsLike = `Feels like ${Math.round(data.main.feels_like)}°C`;
+          const weatherCondition = `${data.weather[0].description}.`;
+          const wind = `${data.wind.speed}m/s ${getDirection(data.wind.deg)}`;
+          const pressure = `${data.main.pressure}hPa`;
+          const humidity = `${data.main.humidity}%`;
+          const dewPoint = `${Math.round(data.main.temp - ((100 - data.main.humidity) / 5))}°C`;
+          const visibility = `${data.visibility / 1000}km`;
+
+          document.getElementById('location').textContent = location;
+          document.getElementById('weather-condition').textContent = `${feelsLike} ${weatherCondition}`;
+          document.querySelector('.temp').textContent = temp;
+          document.getElementById('wind').textContent = wind;
+          document.getElementById('pressure').textContent = pressure;
+          document.getElementById('humidity').textContent = humidity;
+          document.getElementById('dewPoint').textContent = dewPoint;
+          document.getElementById('visibility').textContent = visibility;
+        })
+        .catch(err => alert('City not found.'));
+    }
+
+    function getDirection(deg) {
+      const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+      const value = Math.floor((deg / 45) + 0.5);
+      return directions[value % 8];
+    }
+  </script>
+</body>
+</html>

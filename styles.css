@@ -1,0 +1,158 @@
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f5; /* Light background for a sleek, professional look */
+}
+
+.weather-web {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo img {
+  width: 160px;
+  margin-bottom: 100px;
+}
+
+h2 {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#searchCity {
+  width: 80%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+#searchCity:focus {
+  outline: none;
+  border-color: #0066cc;
+  background-color: #fff;
+}
+
+button {
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 1em;
+  width: 80%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+.weather-info {
+  margin-top: 30px;
+}
+
+.current-weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 30em;
+  margin-right: 160px;
+}
+
+.temp-info {
+  text-align: left;
+}
+
+.temp {
+  font-size: 3.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.details {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.details p {
+  font-size: 1em;
+  margin: 8px 0;
+  color: #666;
+}
+
+.details strong {
+  color: #333;
+}
+
+#location {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #444;
+}
+
+#weather-condition {
+  font-size: 1.1em;
+  color: #777;
+}
+
+footer {
+  text-align: margin-bottom;
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+  .weather-web {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  #searchCity, button {
+    width: 90%;
+  }
+}
+footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #666;
+  text-align: center;
+}
